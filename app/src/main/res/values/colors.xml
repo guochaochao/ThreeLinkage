@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <!-- 主题黄色 -->
+    <color name="theme_yellow">#FFCC00</color>
+    <!-- 灰线颜色 -->
+    <color name="line_hui">#E5E5E5</color>
+</resources>
