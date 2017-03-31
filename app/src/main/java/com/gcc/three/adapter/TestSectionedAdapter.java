@@ -1,12 +1,8 @@
 package com.gcc.three.adapter;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -14,7 +10,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.gcc.three.R;
-import com.gcc.three.bean.GoodsListBean;
+import com.gcc.three.bean.CateListbean;
 
 import java.util.List;
 
@@ -27,24 +23,16 @@ import java.util.List;
 
 public class TestSectionedAdapter extends SectionedBaseAdapter {
     private Context mContext;
-    public static List<String> mycat22;
-    public static List<List<GoodsListBean.Storegoodslist.Gdlist>> mycat3;
-    public static ExampleAdapter adapter;
-    public static List<List> mycat2;
-    public TestSectionedAdapter(Context context, List<List> mycat2,
-                                List<String> mycat22, List<List<GoodsListBean.Storegoodslist.Gdlist>> mycat3,
-                                ExampleAdapter adapter) {
-        this.mContext = context;
-        this.mycat22 = mycat22;
-        this.mycat3 = mycat3;
-        this.adapter = adapter;
-        this.mycat2 = mycat2;
+    private List<CateListbean.BigcatelistBean.CategorylistBean> beanList;
+    public TestSectionedAdapter(List<CateListbean.BigcatelistBean.CategorylistBean> beanList,Context context) {
+        mContext = context;
+        this.beanList = beanList;
 
     }
 
     @Override
     public Object getItem(int section, int position) {
-        return mycat3.get(section).get(position);
+        return beanList.get(section).getGdlist().get(position);
     }
 
     @Override
@@ -54,12 +42,12 @@ public class TestSectionedAdapter extends SectionedBaseAdapter {
 
     @Override
     public int getSectionCount() {
-        return mycat22.size();
+        return beanList.size();
     }
 
     @Override
     public int getCountForSection(int section) {
-        return mycat3.get(section).size();
+        return beanList.get(section).getGdlist().size();
     }
 
     @Override
@@ -85,14 +73,13 @@ public class TestSectionedAdapter extends SectionedBaseAdapter {
             holder = (ItemHolder) convertView.getTag();
         }
 
-        holder.itemName.setText(mycat3.get(section).get(position).getGdname());
+        holder.itemName.setText(beanList.get(section).getGdlist().get(position).getGdname());
         holder.itemPrice.setText("￥"
-                + mycat3.get(section).get(position).getMinPrice());
+                + beanList.get(section).getGdlist().get(position).getMin_price());
         holder.itemScale.setText("月售"
-                + mycat3.get(section).get(position).getMonthSaled() + "件");
-        holder.itemPraise.setText(mycat3.get(section).get(position)
-                .getPraiseRate());
-        Glide.with(mContext).load(mycat3.get(section).get(position).getPictureUrl()).into(holder.itemPic);
+                + beanList.get(section).getGdlist().get(position).getMonth_saled() + "件");
+        holder.itemPraise.setText(beanList.get(section).getGdlist().get(position).getPraise_rate());
+        Glide.with(mContext).load(beanList.get(section).getGdlist().get(position).getPicture_url()).into(holder.itemPic);
         return convertView;
     }
 
@@ -109,8 +96,8 @@ public class TestSectionedAdapter extends SectionedBaseAdapter {
             layout = (LinearLayout) convertView;
         }
         layout.setClickable(false);
-        ((TextView) layout.findViewById(R.id.textItem)).setText(mycat22
-                .get(section));
+        ((TextView) layout.findViewById(R.id.textItem)).setText(beanList
+                .get(section).getGdname());
         return layout;
     }
 
